@@ -11,6 +11,8 @@ on:
         type: string
         default: 'npm run build'
     secrets:
+      repoToken:
+        required: true
       netlifyAuthToken:
         required: true
       netlifySiteId:
@@ -29,9 +31,12 @@ jobs:
           cache: 'npm'
       - run: npm ci
       - run: ${{inputs.build_command}}
-      - uses: jsmrcaga/action-netlify-deploy@9cc40dcd499dd1511b3cc99912444f8970411cc6
+      - name: Deploy to Netlify
+        uses: nwtgck/actions-netlify@v1.2
         with:
+          publish-dir: './output/dist'
+          github-token: ${{ secrets.repoToken }}
+          deploy-message: "Deploy from GitHub Actions"
+        env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.netlifyAuthToken }}
-          NETLIFY_SITE_ID: ${{ secrets.netlifySiteId }}
-          NETLIFY_DEPLOY_TO_PROD: true
-          build_directory: ${{ inputs.build_directory }}
+          NETLIFY_SITE_ID: ${{ secrets.S }}
