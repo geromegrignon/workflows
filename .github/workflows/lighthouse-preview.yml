@@ -11,7 +11,7 @@ on:
         required: true
 
 jobs:
-  lighthouse:
+  lhci:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
