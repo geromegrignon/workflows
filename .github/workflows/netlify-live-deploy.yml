@@ -1,0 +1,32 @@
+name: Netlify Live Deploy
+
+on:
+  workflow_call:
+    inputs:
+      build_directory:
+        required: true
+        type: string
+      build_command:
+        required: false
+        type: string
+        default: 'npm run build'
+    secrets:
+      netlifyAuthToken:
+        required: true
+      netlifySiteId:
+        required: true
+
+jobs:
+  prveiew-deploy:
+    name: 'Deploy'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - uses: jsmrcaga/action-netlify-deploy@master
+        with:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.netlifyAuthToken }}
+          NETLIFY_SITE_ID: ${{ secrets.netlifySiteId }}
+          NETLIFY_DEPLOY_TO_PROD: true
+          build_directory: ${{ inputs.build_directory }}
+          build_command: ${{ inputs.build_command }}
