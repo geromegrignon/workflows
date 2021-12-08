@@ -1,0 +1,16 @@
+name: Lighthouse Live
+
+on:
+  workflow_call:
+    inputs:
+      siteUrl:
+        required: true
+        type: string
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+      - uses: treosh/lighthouse-ci-action@v8
+        with:
+          urls: "${{ inputs.siteUrl }}"
+          configPath: './lighthouserc.json'
