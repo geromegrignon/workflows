@@ -17,8 +17,7 @@ on:
         required: true
 
 jobs:
-  prveiew-deploy:
-    name: 'Deploy'
+  deploy:
     runs-on: ubuntu-latest
 
     steps:

@@ -1,4 +1,4 @@
-name: npm job
+name: Node job
 
 on:
   workflow_call:
@@ -8,7 +8,7 @@ on:
         type: string
 
 jobs:
-  step:
+  node_job:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
