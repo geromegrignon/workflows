@@ -22,7 +22,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.4.1
+        with:
+          node-version: '14'
+          cache: 'npm'
+      - run: npm ci
+      - run: ${{inputs.build_command}}
       - uses: jsmrcaga/action-netlify-deploy@9cc40dcd499dd1511b3cc99912444f8970411cc6
         with:
           NETLIFY_AUTH_TOKEN: ${{ secrets.netlifyAuthToken }}

@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - uses: jsmrcaga/action-netlify-deploy@9cc40dcd499dd1511b3cc99912444f8970411cc6
         with:
           NETLIFY_AUTH_TOKEN: ${{ secrets.netlifyAuthToken }}
