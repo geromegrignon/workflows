@@ -11,6 +11,8 @@ on:
         type: string
         default: 'npm run build'
     secrets:
+      repoToken:
+        required: true
       netlifyAuthToken:
         required: true
       netlifySiteId:
@@ -32,6 +34,8 @@ jobs:
         uses: nwtgck/actions-netlify@v1.2
         with:
           publish-dir: './output/dist'
+          github-token: ${{ secrets.repoToken }}
+          deploy-message: "Deploy from GitHub Actions"
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.netlifyAuthToken }}
           NETLIFY_SITE_ID: ${{ secrets.netlifySiteId }}
