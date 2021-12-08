@@ -33,6 +33,7 @@ jobs:
         uses: nwtgck/actions-netlify@v1.2
         with:
           publish-dir: './output/dist'
+          production-deploy: true
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.netlifyAuthToken }}
           NETLIFY_SITE_ID: ${{ secrets.netlifySiteId }}
