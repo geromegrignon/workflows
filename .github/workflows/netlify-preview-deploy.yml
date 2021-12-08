@@ -22,9 +22,16 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: jsmrcaga/action-netlify-deploy@9cc40dcd499dd1511b3cc99912444f8970411cc6
+      - uses: actions/setup-node@v2.4.1
         with:
+          node-version: '14'
+          cache: 'npm'
+      - run: npm ci
+      - run: ${{inputs.build_command}}
+      - name: Deploy to Netlify
+        uses: nwtgck/actions-netlify@v1.2
+        with:
+          publish-dir: './output/dist'
+        env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.netlifyAuthToken }}
           NETLIFY_SITE_ID: ${{ secrets.netlifySiteId }}
-          build_directory: ${{ inputs.build_directory }}
-          build_command: ${{ inputs.build_command }}
