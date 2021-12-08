@@ -3,9 +3,13 @@ name: Netlify Preview Deploy
 on:
   workflow_call:
     inputs:
-      projectId:
+      build_directory:
         required: true
         type: string
+      build_command:
+        required: false
+        type: string
+        default: 'npm run build'
     secrets:
       netlifyAuthToken:
         required: true
@@ -23,3 +27,5 @@ jobs:
         with:
           NETLIFY_AUTH_TOKEN: ${{ secrets.netlifyAuthToken }}
           NETLIFY_SITE_ID: ${{ secrets.netlifySiteId }}
+          build_directory: ${{ inputs.build_directory }}
+          build_command: ${{ inputs.build_command }}
